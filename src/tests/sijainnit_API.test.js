@@ -6,4 +6,6 @@ const request = supertest(app);
 test('gets the sijainnit endpoint', async () => {
     const response = await request.get('/sijainnit');
     expect(response.status).toBe(200);
+
 });
+

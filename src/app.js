@@ -10,9 +10,6 @@ app.use(express.json());
 app.use('/sijainnit', sijainnitRoutes);
 app.use('/otp', otpRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
 
 module.exports = app;
 
