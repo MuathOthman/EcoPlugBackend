@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "test": "npx jest test",
+    "test": "jest tests --forceExit",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
