@@ -77,24 +77,5 @@ pipeline {
         always {
             // For example, clean up temporary files
             sh 'npm clean'
-        }
-        success {
-            // Actions to take if the entire pipeline succeeds
-            // For example, send a success notification
-            slackSend(
-                channel: '#jenkins-notification',
-                color: 'good',
-                message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-            )
-        }
-        failure {
-            // Actions to take if the pipeline fails at any stage
-            // For example, send a failure notification
-            slackSend(
-                channel: '#jenkins-notification',
-                color: 'danger',
-                message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-            )
-        }
     }
 }
