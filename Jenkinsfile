@@ -77,5 +77,6 @@ pipeline {
         always {
             // For example, clean up temporary files
             sh 'npm clean'
+        }
     }
 }
