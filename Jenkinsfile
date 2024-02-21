@@ -69,10 +69,9 @@ pipeline {
     }
 
     post {
-        // Define actions to take based on the overall pipeline result
         always {
-            // For example, clean up temporary files
-            sh 'npm clean'
+            // Clean up your workspace
+            cleanWs()
         }
     }
 }
