@@ -26,7 +26,7 @@ pipeline {
             steps {
                 // Run your tests. This example uses 'npm test'.
                 // You can also use other test runners like Jest, Mocha, etc.
-                sh 'npm run test -- --verbose'
+                sh 'npm run test'
             }
 
             post {
