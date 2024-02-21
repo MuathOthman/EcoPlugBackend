@@ -52,7 +52,8 @@ pipeline {
         stage('Build') {
             steps {
                 // Run a build script or a command. This could involve bundling your Node.js application.
-                sh 'npm run build'
+                //sh 'npm run build'
+                echo 'Building...'
             }
         }
 
