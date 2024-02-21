@@ -30,11 +30,6 @@ pipeline {
             }
 
             post {
-                // Define actions to take based on the outcome of the 'Test' stage
-                always {
-                    // For example, archive JUnit-formatted test reports
-                    junit '**/test-results/**/*.xml'
-                }
                 success {
                     echo 'Tests passed Successfully!'
                     slackSend(
