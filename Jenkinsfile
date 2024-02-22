@@ -29,6 +29,18 @@ pipeline {
                 sh 'npm run test'
             }
 
+        stage('Coverage Report') {
+            steps {
+              publishHTML(target: [
+                                  allowMissing: false,
+                                  alwaysLinkToLastBuild: true,
+                                  keepAll: true,
+                                  reportDir: 'coverage/lcov-report',
+                                  reportFiles: 'index.html',
+                                  reportName: 'Jest Coverage Report'
+                              ])
+              }
+        }
             post {
                 success {
                     echo 'Tests passed Successfully!'
