@@ -1,10 +1,10 @@
 pipeline {
     agent any // This specifies that the pipeline can run on any available agent
+
     tools {
-            nodejs "NodeJS"
-
-        }
-
+        // Ensure Jenkins has a NodeJS installation named "NodeJS"
+        nodejs "NodeJS"
+    }
 
     stages {
         stage('Checkout') {
@@ -13,7 +13,6 @@ pipeline {
                 checkout scm
             }
         }
-
 
         stage('Install') {
             steps {
@@ -25,34 +24,41 @@ pipeline {
         stage('Test') {
             steps {
                 // Run your tests. This example uses 'npm test'.
-                // You can also use other test runners like Jest, Mocha, etc.
                 sh 'npm run test'
             }
 
             post {
                 success {
                     echo 'Tests passed Successfully!'
-                    slackSend(
-                                channel: '#jenkins-notification',
-                                color: 'good',
-                                message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-                            )
+                    // Configure Slack plugin in Jenkins for slackSend to work
+                    slackSend(channel: '#jenkins-notification', color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
                 failure {
                     echo 'Tests failed!'
-                    slackSend(
-                                channel: '#jenkins-notification',
-                                color: 'danger',
-                                message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
-                            )
+                    // Configure Slack plugin in Jenkins for slackSend to work
+                    slackSend(channel: '#jenkins-notification', color: 'danger', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
+            }
+        }
+
+        stage('Coverage Report') {
+            steps {
+                // Ensure the HTML Publisher plugin is installed in Jenkins for publishHTML to work
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'coverage/lcov-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Jest Coverage Report'
+                ])
             }
         }
 
         stage('Build') {
             steps {
-                // Run a build script or a command. This could involve bundling your Node.js application.
-                //sh 'npm run build'
+                // Uncomment and configure the build command according to your project's needs
+                // sh 'npm run build'
                 echo 'Building...'
             }
         }
@@ -60,17 +66,15 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Add steps to deploy your application
-                // This might involve SSHing to a server, using a deployment tool, or pushing to a cloud service
-                script {
-                    echo 'Deploying...'
-                }
+                echo 'Deploying...'
+                // Implement deployment logic here (e.g., scp files, ssh commands, deployment scripts)
             }
         }
     }
 
     post {
         always {
-            // Clean up your workspace
+            // Clean up your workspace to free up space
             cleanWs()
         }
     }
