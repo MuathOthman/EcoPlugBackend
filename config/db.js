@@ -1,15 +1,16 @@
 const express = require('express');
 const mysql = require('mysql');
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 
 const connection = mysql.createConnection({
-    host: 'EcoPlug-mariadb', // 10.120.36.50 // EcoPlug-mariadb
-    port: '3306',
-    user: 'root',
-    password: 'dzBO=0%G7i43',
-    database: 'EcoPlug'
+    host: process.env.DB_HOST, // 10.120.36.50 // EcoPlug-mariadb
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 connection.connect(err => {
@@ -18,6 +19,7 @@ connection.connect(err => {
         return;
     }
     console.log('Connected to the database.');
+    console.log((process.env.DB_HOST))
 });
 
 module.exports = connection;
