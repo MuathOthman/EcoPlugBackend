@@ -45,10 +45,26 @@ const findParkings = (req, res) => {
 };
 
 
+const reserveParkingSpot = (req, res) => {
+    const { id, park } = req.body;
+
+    // Update the database to mark the parking spot as reserved
+    connection.query('UPDATE Latauspiste SET tila = 1 WHERE parkki = ? ', [park, id], (err, result) => {
+        if (err) {
+            res.status(500).send({ message: err.message || 'Error updating parking spot.' });
+        } else {
+            res.status(200).send({ message: 'Parking spot reserved successfully.' });
+        }
+    });
+};
+
+
+
 module.exports ={
     findAll,
     findOne,
-    findParkings
+    findParkings,
+    reserveParkingSpot
 };
 
 
