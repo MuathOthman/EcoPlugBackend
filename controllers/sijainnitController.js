@@ -31,7 +31,7 @@ const findOne = (req, res) => {
 
 const findParkings = (req, res) => {
     const name = req.params.id;
-    connection.query('SELECT parkki, tila, latauspisteID FROM Latauspiste L JOIN sijaitsee S ON L.latauspisteID = S.latauspisteID JOIN Sijainti SI ON S.sijainti_ID = SI.sijainti_ID WHERE SI.sijainti_ID = ?', [name],
+    connection.query('SELECT L.parkki, L.tila, L.latauspisteID FROM Latauspiste L JOIN sijaitsee S ON L.latauspisteID = S.latauspisteID JOIN Sijainti SI ON S.sijainti_ID = SI.sijainti_ID WHERE SI.sijainti_ID = ?', [name],
         (err, rows) => {
             if (err) {
                 console.log([name])
@@ -46,14 +46,14 @@ const findParkings = (req, res) => {
 
 
 const reserveParkingSpot = (req, res) => {
-    const { latauspisteID } = req.body;
+    const latauspisteID = req.params.id;
 
     // Update the database to mark the parking spot as reserved
     connection.query('UPDATE Latauspiste SET tila = 1 WHERE latauspisteID = ? ', [latauspisteID], (err, result) => {
         if (err) {
             res.status(500).send({ message: err.message || 'Error updating parking spot.' });
         } else {
-            res.status(200).send({ message: 'Parking spot reserved successfully.' });
+            res.status(200).send({ message: 'Parking spot reserved successfully.', latauspisteID });
         }
     });
 };
