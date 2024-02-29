@@ -14,14 +14,18 @@ const create = (req, res) => {
 
 const get = (req, res) => {
     const { phoneNumber } = req.body;
-    connection.query('SELECT latausID FROM Lataus WHERE asiakas_puh = ?', [phoneNumber], (err, result) => {
-        if (err) {
-            res.status(500).send({ message: err.message || 'Error getting user.' });
-        } else {
-            res.status(200).send({ latausId: result[0].latausID});
+    connection.query(
+        'SELECT latausID FROM Lataus WHERE asiakas_puh = ? ORDER BY latausID DESC LIMIT 1',
+        [phoneNumber],
+        (err, result) => {
+            if (err) {
+                res.status(500).send({ message: err.message || 'Error getting user.' });
+            } else {
+                res.status(200).send({ latausId: result[0] ? result[0].latausID : null });
+            }
         }
-    });
-}
+    );
+};
 
 
 module.exports = {
