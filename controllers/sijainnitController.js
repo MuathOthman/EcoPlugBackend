@@ -31,7 +31,7 @@ const findOne = (req, res) => {
 
 const findParkings = (req, res) => {
     const name = req.params.id;
-    connection.query('SELECT L.parkki, L.tila, L.latauspisteID FROM Latauspiste L JOIN sijaitsee S ON L.latauspisteID = S.latauspisteID JOIN Sijainti SI ON S.sijainti_ID = SI.sijainti_ID WHERE SI.sijainti_ID = ?', [name],
+    connection.query('SELECT L.parkki, L.tila, L.latauspisteID, L.sahkonhinta FROM Latauspiste L JOIN sijaitsee S ON L.latauspisteID = S.latauspisteID JOIN Sijainti SI ON S.sijainti_ID = SI.sijainti_ID WHERE SI.sijainti_ID = ?', [name],
         (err, rows) => {
             if (err) {
                 console.log([name])
