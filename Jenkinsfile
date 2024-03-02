@@ -61,7 +61,6 @@ pipeline {
         }
         stage('Build Application') {
             steps {
-                sh 'npm run build'
                 sh 'docker build -t muathothman/ecoplug:latest .'
                 echo 'Application built and Docker image created.'
             }
