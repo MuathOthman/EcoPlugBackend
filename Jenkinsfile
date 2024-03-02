@@ -1,8 +1,7 @@
 pipeline {
-    agent any // This specifies that the pipeline can run on any available agent
+    agent any
 
     tools {
-        // Ensure Jenkins has a NodeJS installation named "NodeJS"
         nodejs "NodeJS"
     }
 
@@ -26,33 +25,28 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                // Checks out source code from the configured SCM (Source Control Management)
                 checkout scm
             }
         }
 
         stage('Install') {
             steps {
-                // Run 'npm install' to install dependencies
                 sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                // Run your tests. This example uses 'npm test'.
                 sh 'npm run test'
             }
 
             post {
                 success {
                     echo 'Tests passed Successfully!'
-                    // Configure Slack plugin in Jenkins for slackSend to work
                     slackSend(channel: '#jenkins-notification', color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
                 failure {
                     echo 'Tests failed!'
-                    // Configure Slack plugin in Jenkins for slackSend to work
                     slackSend(channel: '#jenkins-notification', color: 'danger', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                 }
             }
@@ -60,7 +54,6 @@ pipeline {
 
         stage('Coverage Report') {
             steps {
-                // Ensure the HTML Publisher plugin is installed in Jenkins for publishHTML to work
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
@@ -74,24 +67,33 @@ pipeline {
 
         stage('Build') {
             steps {
-                // Uncomment and configure the build command according to your project's needs
-                // sh 'npm run build'
-                echo 'Building...'
+                sh 'npm run build'
+                script {
+                    sh '''
+                    # Building Docker image
+                    docker build -t muathothman/ecoplug:latest .
+                    '''
+                }
+                echo 'Application built and Docker image created...'
             }
         }
 
+
         stage('Deploy') {
             steps {
-                // Add steps to deploy your application
                 echo 'Deploying...'
-                // Implement deployment logic here (e.g., scp files, ssh commands, deployment scripts)
-            }
+                script {
+                         withCredentials([usernamePassword(credentialsId: 'docker_hub_credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            sh '''
+                               echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+                               docker push muathothman/ecoplug:latest
+                            '''
+                }
         }
     }
 
     post {
         always {
-            // Clean up your workspace to free up space
             cleanWs()
         }
     }
