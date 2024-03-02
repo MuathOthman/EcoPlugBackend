@@ -15,7 +15,7 @@ const create = (req, res) => {
 const get = (req, res) => {
     const { phoneNumber } = req.body;
     connection.query(
-        'SELECT latausID FROM Lataus WHERE asiakas_puh = ? ORDER BY latausID DESC LIMIT 1',
+        'SELECT latausID, laskunhinta, kokonaisaika FROM Lataus WHERE asiakas_puh = ? ORDER BY latausID DESC LIMIT 1',
         [phoneNumber],
         (err, result) => {
             if (err) {
