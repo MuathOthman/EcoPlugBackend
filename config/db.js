@@ -6,8 +6,8 @@ const app = express();
 app.use(express.json());
 
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST, // 10.120.36.50 // EcoPlug-mariadb
-    port: process.env.DB_Docker_Container,
+    host: process.env.DB_Docker_Container, // 10.120.36.50 // EcoPlug-mariadb
+    port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE
