@@ -61,7 +61,7 @@ pipeline {
         }
         stage('Build Application') {
             steps {
-                sh 'docker build -t muathothman/ecoplug:latest .'
+                sh '/usr/bin/docker build -t muathothman/ecoplug:latest .'
                 echo 'Application built and Docker image created.'
             }
         }
