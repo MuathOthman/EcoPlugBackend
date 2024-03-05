@@ -2,7 +2,7 @@ const connection = require('../config/db');
 
 const create = (req, res) => {
     const { phoneNumber } = req.body;
-    connection.query('INSERT INTO Lataus (kokonaisaika, laskunhinta, asiakas_puh ) VALUES (0, 0, ?)', [phoneNumber], (err, result) => {
+    connection.query('INSERT INTO Lataus (kokonaisaika, laskunhinta, asiakas_puh) VALUES (NULL, NULL, ?)', [phoneNumber], (err, result) => {
         if (err) {
             res.status(500).send({ message: err.message || 'Error creating user.' });
         } else {
@@ -27,30 +27,49 @@ const get = (req, res) => {
     );
 };
 
-const freeLatauspiste = (latauspisteID) => {
-    connection.query('UPDATE Latauspiste SET tila = 0 WHERE latauspisteID = ?', [latauspisteID], (err, result) => {
-        if (err) {
-            console.error('Error updating Latauspiste:', err);
-        } else {
-            console.log('Latauspiste updated successfully:', result);
+const freeLatauspiste = (req, res) => {
+    const { latauspisteID } = req.body;
+    connection.query(
+        'UPDATE Latauspiste SET tila = 0 WHERE latauspisteID = ?',
+        [latauspisteID],
+        (err, result) => {
+            if (err) {
+                res.status(500).send({ message: err.message || 'Error updating Latauspiste.' });
+            } else {
+                res.status(200).send({ message: 'Latauspiste updated successfully.' });
+            }
         }
-    });
+    );
 };
 
-const updateLataus = (latausID, kokonaisaika, laskunhinta) => {
-    connection.query('UPDATE Lataus SET kokonaisaika = ?, laskunhinta = ? WHERE latausID = ?', [kokonaisaika, laskunhinta, latausID], (err, result) => {
-        if (err) {
-            console.error('Error updating Lataus:', err);
-        } else {
-            console.log('Lataus updated successfully:', result);
-        }
-    });
-};
+const updateLataus = (req, res) => {
+    const { latausID, kokonaisaika, laskunhinta } = req.body;
 
+    const parsedKokonaisaika = parseFloat(kokonaisaika);
+    const parsedLaskunhinta = parseFloat(laskunhinta);
+
+    if (isNaN(parsedKokonaisaika) || isNaN(parsedLaskunhinta)) {
+        return res.status(400).send({ message: 'Invalid values for kokonaisaika or laskunhinta.' });
+    }
+
+    connection.query(
+        'UPDATE Lataus SET kokonaisaika = ?, laskunhinta = ? WHERE latausID = ?',
+        [parsedKokonaisaika, parsedLaskunhinta, latausID],
+        (err, result) => {
+            if (err) {
+                console.error('Error updating Lataus:', err);
+                res.status(500).send({ message: err.message || 'Error updating Lataus.' });
+            } else {
+                console.log('Lataus updated successfully:', result);
+                res.status(200).send({ message: 'Lataus updated successfully.' });
+            }
+        }
+    );
+};
 
 module.exports = {
     create,
     get,
     freeLatauspiste,
     updateLataus,
-}
+};
