@@ -27,8 +27,30 @@ const get = (req, res) => {
     );
 };
 
+const freeLatauspiste = (latauspisteID) => {
+    connection.query('UPDATE Latauspiste SET tila = 0 WHERE latauspisteID = ?', [latauspisteID], (err, result) => {
+        if (err) {
+            console.error('Error updating Latauspiste:', err);
+        } else {
+            console.log('Latauspiste updated successfully:', result);
+        }
+    });
+};
+
+const updateLataus = (latausID, kokonaisaika, laskunhinta) => {
+    connection.query('UPDATE Lataus SET kokonaisaika = ?, laskunhinta = ? WHERE latausID = ?', [kokonaisaika, laskunhinta, latausID], (err, result) => {
+        if (err) {
+            console.error('Error updating Lataus:', err);
+        } else {
+            console.log('Lataus updated successfully:', result);
+        }
+    });
+};
+
 
 module.exports = {
     create,
-    get
+    get,
+    freeLatauspiste,
+    updateLataus,
 }
