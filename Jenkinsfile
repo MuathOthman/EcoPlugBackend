@@ -22,6 +22,12 @@ pipeline {
                 }
             }
         }
+        stage('Checking Docker Installation') {
+            steps {
+                sh 'docker --version'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
