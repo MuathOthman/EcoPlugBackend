@@ -43,18 +43,11 @@ const freeLatauspiste = (req, res) => {
 };
 
 const updateLataus = (req, res) => {
-    const { latausID, kokonaisaika, laskunhinta } = req.body;
-
-    const parsedKokonaisaika = parseFloat(kokonaisaika);
-    const parsedLaskunhinta = parseFloat(laskunhinta);
-
-    if (isNaN(parsedKokonaisaika) || isNaN(parsedLaskunhinta)) {
-        return res.status(400).send({ message: 'Invalid values for kokonaisaika or laskunhinta.' });
-    }
+    const { latausID, chargingTime, totalCost, phoneNumber} = req.body;
 
     connection.query(
-        'UPDATE Lataus SET kokonaisaika = ?, laskunhinta = ? WHERE latausID = ?',
-        [parsedKokonaisaika, parsedLaskunhinta, latausID],
+        'UPDATE Lataus SET kokonaisaika = ?, laskunhinta = ? WHERE latausID = ? and asiakas_puh = ?',
+        [parseFloat(chargingTime), parseFloat(totalCost), latausID, phoneNumber],
         (err, result) => {
             if (err) {
                 console.error('Error updating Lataus:', err);
