@@ -4,6 +4,7 @@ pipeline {
     tools {
         nodejs "NodeJS"
     }
+
     stages {
         stage('Prepare Environment') {
             steps {
@@ -22,9 +23,12 @@ pipeline {
                 }
             }
         }
+
         stage('Checking Docker Installation') {
             steps {
-                sh 'docker --version'
+                script {
+                    sh 'docker --version'
+                }
             }
         }
 
@@ -33,16 +37,19 @@ pipeline {
                 checkout scm
             }
         }
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
+
         stage('Run Tests') {
             steps {
                 sh 'npm run test'
             }
         }
+
         stage('Generate Coverage Report') {
             steps {
                 publishHTML(target: [
@@ -55,12 +62,16 @@ pipeline {
                 ])
             }
         }
+
         stage('Build Application') {
             steps {
-                sh '/usr/bin/docker build -t muathothman/ecoplug:latest .'
-                echo 'Application built and Docker image created.'
+                script {
+                    sh 'docker build -t muathothman/ecoplug:latest .'
+                    echo 'Application built and Docker image created.'
+                }
             }
         }
+
         stage('Deploy Application') {
             steps {
                 script {
@@ -75,6 +86,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             cleanWs()
