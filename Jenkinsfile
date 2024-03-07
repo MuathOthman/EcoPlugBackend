@@ -5,6 +5,10 @@ pipeline {
         nodejs "NodeJS"
     }
 
+    environment {
+            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+    }
+
     stages {
         stage('Prepare Environment') {
             steps {
