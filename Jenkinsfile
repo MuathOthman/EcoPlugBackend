@@ -4,11 +4,6 @@ pipeline {
     tools {
         nodejs "NodeJS"
     }
-
-    environment {
-            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-    }
-
     stages {
         stage('Prepare Environment') {
             steps {
@@ -27,39 +22,31 @@ pipeline {
                 }
             }
         }
-        stage('Debug') {
-            steps {
-                sh 'echo $PATH'
-                sh 'env'
-            }
-        }
-
-        stage('Checking Docker Installation') {
-            steps {
-                script {
-                    sh 'docker --version'
-                }
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
-
         stage('Run Tests') {
             steps {
                 sh 'npm run test'
             }
+            post {
+                success {
+                    echo 'Tests passed successfully!'
+                    slackSend(channel: '#jenkins-notification', color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                }
+                failure {
+                    echo 'Tests failed!'
+                    slackSend(channel: '#jenkins-notification', color: 'danger', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                }
+            }
         }
-
         stage('Generate Coverage Report') {
             steps {
                 publishHTML(target: [
@@ -72,16 +59,12 @@ pipeline {
                 ])
             }
         }
-
         stage('Build Application') {
             steps {
-                script {
-                    sh 'docker build -t muathothman/ecoplug:latest .'
-                    echo 'Application built and Docker image created.'
-                }
+                sh 'docker build -t muathothman/ecoplug:latest .'
+                echo 'Application built and Docker image created.'
             }
         }
-
         stage('Deploy Application') {
             steps {
                 script {
@@ -96,7 +79,6 @@ pipeline {
             }
         }
     }
-
     post {
         always {
             cleanWs()
