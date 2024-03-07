@@ -51,7 +51,7 @@ pipeline {
         }
         stage('Build Application') {
             steps {
-                sh 'docker build -t muathothman/ecoplug:latest .'
+                sh 'docker build -t muathothman/ecoplugbe:latest .'
                 echo 'Application built and Docker image created.'
             }
         }
@@ -61,7 +61,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker_hub_credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                        docker push muathothman/ecoplug:latest
+                        docker push muathothman/ecoplugbe:latest
                         '''
                     }
                 }
