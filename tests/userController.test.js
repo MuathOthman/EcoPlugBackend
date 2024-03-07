@@ -1,7 +1,6 @@
 const supertest = require('supertest');
 const app = require('../app');
 const request = supertest(app);
-
 describe('User Controller Tests', () => {
     test('should create user', async () => {
         const response = await request.post('/user/create-user').send({

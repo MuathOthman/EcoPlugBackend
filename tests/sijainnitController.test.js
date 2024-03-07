@@ -22,7 +22,7 @@ describe('Sijainnit Controller Tests', () => {
     });
 
     test('should get parking spots', async () => {
-        const response = await request.get('/sijainnit/parkings/5');
+        const response = await request.get('/sijainnit/parkings/6');
         expect(response.status).toBe(200);
         expect(response.body).toEqual(
             expect.arrayContaining([
