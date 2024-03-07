@@ -36,16 +36,6 @@ pipeline {
             steps {
                 sh 'npm run test'
             }
-            post {
-                success {
-                    echo 'Tests passed successfully!'
-                    slackSend(channel: '#jenkins-notification', color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                }
-                failure {
-                    echo 'Tests failed!'
-                    slackSend(channel: '#jenkins-notification', color: 'danger', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                }
-            }
         }
         stage('Generate Coverage Report') {
             steps {
