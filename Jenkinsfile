@@ -23,6 +23,12 @@ pipeline {
                 }
             }
         }
+        stage('Debug') {
+            steps {
+                sh 'echo $PATH'
+                sh 'env'
+            }
+        }
 
         stage('Checking Docker Installation') {
             steps {
