@@ -1,6 +1,3 @@
-![EcoPlug Logo](/assets/Logo.png)
-
-
 # EcoPlug
 - [EcoPlug Frontend](https://github.com/MuathOthman/EcoPlugMobileApp)
 
