@@ -38,3 +38,5 @@ describe('User Controller Tests', () => {
         expect(response.body).toHaveProperty('message', 'Latauspiste updated successfully.');
     });
 });
+
+

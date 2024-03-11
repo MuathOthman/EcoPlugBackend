@@ -12,3 +12,5 @@ describe('Charging Controller Tests', () => {
         expect(response.body).toEqual({ message: 'Charging stated' });
     });
 });
+
+

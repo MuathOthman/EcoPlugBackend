@@ -40,3 +40,5 @@ describe('Sijainnit Controller Tests', () => {
         expect(response.body).toHaveProperty('message', 'Parking spot reserved successfully.');
     });
 });
+
+
