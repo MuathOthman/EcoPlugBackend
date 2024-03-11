@@ -21,6 +21,9 @@ Briefly describe your project and its purpose. Include key features and function
 
 ## Database Schema
 
+![EcoPlug Logo](<img width="600" alt="Näyttökuva 2024-3-11 kello 11 18 07" src="https://github.com/MuathOthman/EcoPlugBackend/assets/111856786/8420a6f4-2d15-409f-ab9b-f789a302ed68">
+) <!-- If you have a logo, replace link-to-your-logo.png with the actual link -->
+
 ### Sijainti Table
 
 | sijainti_ID | latitude | longitude | nimi | osoite | kaupunki | postinumero |
