@@ -61,30 +61,6 @@ INSERT INTO Sijainti VALUES
 ```
 
 ```sql
--- Create Sijaitsee table
-CREATE TABLE IF NOT EXISTS Sijaitsee (
-  sijainti_ID INT,
-  latauspisteID INT,
-  PRIMARY KEY (sijainti_ID, latauspisteID),
-  FOREIGN KEY (sijainti_ID) REFERENCES Sijainti(sijainti_ID),
-  FOREIGN KEY (latauspisteID) REFERENCES Latauspiste(latauspisteID)
-);
-```
-
-```sql
--- Insert sample data into Sijaitsee
-INSERT INTO Sijaitsee VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 5),
-(1, 6),
-...
-(10,140);
-```
-
-```sql
 -- Create Latauspiste table
 CREATE TABLE IF NOT EXISTS Latauspiste (
   latauspisteID INT PRIMARY KEY,
@@ -110,28 +86,6 @@ INSERT INTO Latauspiste VALUES
 ```
 
 ```sql
--- Create Suorittaa table
-CREATE TABLE IF NOT EXISTS Suorittaa (
-  latauspisteID INT,
-  latausID INT,
-  PRIMARY KEY (latauspisteID, latausID),
-  FOREIGN KEY (latauspisteID) REFERENCES Latauspiste(latauspisteID),
-  FOREIGN KEY (latausID) REFERENCES Lataus(latausID)
-);
-```
-
-```sql
--- Insert sample data into Suorittaa
-INSERT INTO Suorittaa VALUES
-(2, 1),
-(128, 2),
-(20, 5),
-(113, 14),
-(85, 16),
-(72, 19);
-```
-
-```sql
 -- Create Lataus table
 CREATE TABLE IF NOT EXISTS Lataus (
   latausID INT PRIMARY KEY,
@@ -152,6 +106,51 @@ INSERT INTO Lataus VALUES
 (6, 0, 0, '+358442379461'),
 (7, 0, 0, '+358442379461');
 ```
+
+
+```sql
+-- Create Sijaitsee table
+CREATE TABLE IF NOT EXISTS Sijaitsee (
+  sijainti_ID INT,
+  latauspisteID INT,
+  PRIMARY KEY (sijainti_ID, latauspisteID),
+  FOREIGN KEY (sijainti_ID) REFERENCES Sijainti(sijainti_ID),
+  FOREIGN KEY (latauspisteID) REFERENCES Latauspiste(latauspisteID)
+);
+```
+
+```sql
+-- Insert sample data into Sijaitsee
+INSERT INTO Sijaitsee VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6);
+```
+
+```sql
+-- Create Suorittaa table
+CREATE TABLE IF NOT EXISTS Suorittaa (
+  latauspisteID INT,
+  latausID INT,
+  PRIMARY KEY (latauspisteID, latausID),
+  FOREIGN KEY (latauspisteID) REFERENCES Latauspiste(latauspisteID),
+  FOREIGN KEY (latausID) REFERENCES Lataus(latausID)
+);
+```
+
+```sql
+-- Insert sample data into Suorittaa
+INSERT INTO Suorittaa VALUES
+(2, 1),
+(3, 2),
+(4, 3),
+(5, 4),
+(6, 5);
+```
+
 ### 2. Clone the Repository
 
 ```bash
