@@ -197,7 +197,3 @@ Get a twilio account , authentic token and sid for the .env file.
 here is a full tutorial how to do it: 
 
 [Twilio Tutorial](https://www.youtube.com/watch?v=-mKz-TnziXA&t=322s)
-
-
-
-
