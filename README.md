@@ -109,8 +109,8 @@ INSERT INTO Lataus VALUES
 
 
 ```sql
--- Create Sijaitsee table
-CREATE TABLE IF NOT EXISTS Sijaitsee (
+-- Create sijaitsee table
+CREATE TABLE IF NOT EXISTS sijaitsee (
   sijainti_ID INT,
   latauspisteID INT,
   PRIMARY KEY (sijainti_ID, latauspisteID),
@@ -120,8 +120,8 @@ CREATE TABLE IF NOT EXISTS Sijaitsee (
 ```
 
 ```sql
--- Insert sample data into Sijaitsee
-INSERT INTO Sijaitsee VALUES
+-- Insert sample data into sijaitsee
+INSERT INTO sijaitsee VALUES
 (1, 1),
 (1, 2),
 (1, 3),
@@ -131,8 +131,8 @@ INSERT INTO Sijaitsee VALUES
 ```
 
 ```sql
--- Create Suorittaa table
-CREATE TABLE IF NOT EXISTS Suorittaa (
+-- Create suorittaa table
+CREATE TABLE IF NOT EXISTS suorittaa (
   latauspisteID INT,
   latausID INT,
   PRIMARY KEY (latauspisteID, latausID),
@@ -142,8 +142,8 @@ CREATE TABLE IF NOT EXISTS Suorittaa (
 ```
 
 ```sql
--- Insert sample data into Suorittaa
-INSERT INTO Suorittaa VALUES
+-- Insert sample data into suorittaa
+INSERT INTO suorittaa VALUES
 (2, 1),
 (3, 2),
 (4, 3),
