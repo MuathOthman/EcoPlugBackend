@@ -51,6 +51,8 @@ Exit the MySQL shell:
 ```sql
 exit;
 ```
+---
+
 Login into your new user & create the database and tables:
 ```sql
 mysql -u new_user -p
