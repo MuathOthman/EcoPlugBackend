@@ -4,7 +4,13 @@
 
 Welcome to EcoPlug, an open-source electric vehicle (EV) charging system! This project aims to provide a scalable and efficient solution for managing EV charging stations. The system allows users to locate charging stations, view their details, and perform charging transactions seamlessly.
 
-## Setup
+### Table of Contents
+1. [Database Setup](#1-database-setup)
+2. [Clone the Repository](#2-clone-the-repository)
+3. [Create Environment File](#3-create-environment-file)
+4. [Install Dependencies and Run the Server](#4-install-dependencies-and-run-the-server)
+5. [Twilio Integration](#5-twilio)
+
 
 ### 1. Database Setup
 
@@ -149,4 +155,49 @@ INSERT INTO Lataus VALUES
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/EcoPlug.git
+git clone https://github.com/MuathOthman/EcoPlugBackend
+```
+
+### 3. Create Environment File
+
+Create a .env file in the root of the project and add the following configurations:
+
+```bash
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+SID=your_twilio_sid
+
+DB_Docker_Container=your_db_docker_container_name
+DB_HOST=your_db_host
+DB_PORT=your_db_port
+DB_USER=your_db_username
+DB_PASSWORD=your_db_password
+DB_DATABASE=your_db_name
+```
+### 4. Install Dependencies and Run the Server
+
+#### For Mac:
+
+```bash
+# Change directory to the EcoPlugBackend folder
+cd EcoPlugBackend
+
+# Install Node.js (if not installed)
+brew install node
+
+# Install project dependencies
+npm install
+
+# Run the server in development mode
+npm run dev
+```
+### 5. Twilio
+
+Get a twilio account , authentic token and sid for the .env file.
+here is a full tutorial how to do it: 
+
+[Twilio Tutorial](https://www.youtube.com/watch?v=-mKz-TnziXA&t=322s)
+
+
+
+
