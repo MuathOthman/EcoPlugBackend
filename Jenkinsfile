@@ -36,16 +36,6 @@ pipeline {
             steps {
                 sh 'npm run test'
             }
-            post {
-                success {
-                    echo 'Tests passed successfully!'
-                    slackSend(channel: '#jenkins-notification', color: 'good', message: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                }
-                failure {
-                    echo 'Tests failed!'
-                    slackSend(channel: '#jenkins-notification', color: 'danger', message: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                }
-            }
         }
         stage('Generate Coverage Report') {
             steps {
@@ -61,7 +51,7 @@ pipeline {
         }
         stage('Build Application') {
             steps {
-                sh '/usr/bin/docker build -t muathothman/ecoplug:latest .'
+                sh 'docker build -t muathothman/ecoplugbe:latest .'
                 echo 'Application built and Docker image created.'
             }
         }
@@ -71,7 +61,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker_hub_credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                        docker push muathothman/ecoplug:latest
+                        docker push muathothman/ecoplugbe:latest
                         '''
                     }
                 }
