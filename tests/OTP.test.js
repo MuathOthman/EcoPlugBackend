@@ -1,7 +1,7 @@
 const supertest = require('supertest');
-const app = require('./app.js');
+const app = require('../app.js');
 const request = supertest(app);
-/*
+
 test('sendOTP', async () => {
         const response = await request.post('/otp/send-otp').send({
             phoneNumber: '+358442379461'
@@ -21,4 +21,3 @@ test('verifyOTP', async () => {
     }
 );
 
- */
