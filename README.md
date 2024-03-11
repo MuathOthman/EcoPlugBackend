@@ -146,3 +146,7 @@ INSERT INTO Lataus VALUES
 (6, 0, 0, '+358442379461'),
 (7, 0, 0, '+358442379461');
 ```
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/EcoPlug.git
