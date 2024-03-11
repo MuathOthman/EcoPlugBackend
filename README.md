@@ -10,7 +10,7 @@ Welcome to EcoPlug, an open-source electric vehicle (EV) charging system! This p
 
 #### ER Diagram
 
-![ER Diagram](er_diagram.png)
+![ER Diagram](ER-Diagram.png)
 
 The database consists of the following tables:
 
