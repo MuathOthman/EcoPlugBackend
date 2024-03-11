@@ -28,6 +28,36 @@ The database consists of the following tables:
 
 To set up the database, run the following queries in your MariaDB:
 
+Open terminal and login to mysql:
+```sql
+mysql
+```
+
+Create a new user:
+```sql
+-- Replace 'new_user' and 'password' with your desired username and password
+CREATE USER 'new_user'@'localhost' IDENTIFIED BY 'password';
+```
+
+Grant all privileges to the new user:
+```sql
+GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'localhost' WITH GRANT OPTION;
+```
+Flush privileges to apply the changes:
+```sql
+FLUSH PRIVILEGES;
+```
+Exit the MySQL shell:
+```sql
+exit;
+```
+---
+
+Login into your new user & create the database and tables:
+```sql
+mysql -u new_user -p
+```
+
 ```sql
 -- Create database
 CREATE DATABASE IF NOT EXISTS EcoPlug;
