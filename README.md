@@ -1,22 +1,79 @@
-# EcoPlug
-- [EcoPlug Frontend](https://github.com/MuathOthman/EcoPlugMobileApp)
+# EcoPlug Charging Stations
 
-## Vision
-The vision of the project
+![EcoPlug Logo](link-to-your-logo.png) <!-- If you have a logo, replace link-to-your-logo.png with the actual link -->
 
-Our goal is to simplify the lives of electric vehicle owners by providing real-time monitoring of charging point availability. Charging electric vehicles can be challenging today, as the status of charging points is often unclear, leading to long wait times or issues with reserved points.
+## Overview
 
-## Solution
-Creating an intelligent system that allows users to track the status of charging points in real-time. Available charging points are immediately visible to users, and they receive alerts when a point becomes reserved or becomes available.
+EcoPlug Charging Stations is a project that manages electric vehicle charging stations, providing information about their locations, statuses, and usage.
 
-## Benefits
-Our aim is to create an easy-to-use and efficient system that enhances the smoothness of charging electric vehicles. Users can quickly find an available charging point and focus on the hassle-free use of their electric vehicles.
+## Table of Contents
 
-## Next Steps
-We aim to empower users by providing them with the chance to create their own profiles within the system. This will enhance the personalization of the user experience, allowing individuals to customize settings and preferences.
+1. [Introduction](#introduction)
+2. [Database Schema](#database-schema)
+3. [Setup](#setup)
+4. [Usage](#usage)
+5. [Contributing](#contributing)
+6. [License](#license)
 
+## Introduction
 
-- Special thanks to [Muath Othman](https://github.com/MuathOthman), [Isabella Kovero](https://github.com/isakovero), [Agrin Sadon](https://github.com/agrinsadon) and [Mohammed Sadik Aziz](https://github.com/mohammedsadik99) for their contributions.
+Briefly describe your project and its purpose. Include key features and functionalities.
 
----
-Feel free to customize this template further based on your project's specific needs.
+## Database Schema
+
+### Sijainti Table
+
+| sijainti_ID | latitude | longitude | nimi | osoite | kaupunki | postinumero |
+|--------------|----------|-----------|------|--------|----------|-------------|
+| ...          | ...      | ...       | ...  | ...    | ...      | ...         |
+
+### Sijaitsee Table
+
+| sijainti_ID | latauspisteID |
+|-------------|---------------|
+| ...         | ...           |
+
+### Latauspiste Table
+
+| latauspisteID | tila | latausteho | sahkonhinta | parkki |
+|---------------|------|------------|-------------|--------|
+| ...           | ...  | ...        | ...         | ...    |
+
+### Suorittaa Table
+
+| latauspisteID | latausID |
+|---------------|----------|
+| ...           | ...      |
+
+### Lataus Table
+
+| latausID | kokonaisaika | laskunhinta | asiakas_puh |
+|----------|--------------|-------------|-------------|
+| ...      | ...          | ...         | ...         |
+
+Provide a brief explanation of your database schema, including the tables and their columns.
+
+## Setup
+
+1. **MySQL Setup:**
+   - Install MySQL on your machine.
+   - Create a new database for this project.
+   - Create tables and insert sample data using the provided SQL queries.
+
+2. **Application Setup:**
+   - Clone the repository.
+   - Install dependencies (if any).
+
+3. **Configuration:**
+   - Update the `config.js` or any configuration file with your database connection details.
+
+```javascript
+module.exports = {
+  database: {
+    host: 'localhost',
+    user: 'your_username',
+    password: 'your_password',
+    database: 'your_database_name',
+  },
+  // Other configuration options...
+};
