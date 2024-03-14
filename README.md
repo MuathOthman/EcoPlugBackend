@@ -2,6 +2,8 @@
 
 ## Introduction
 
+This is the Backend for the EcoPlug and here is the Frontend side of the EcoPLug : [Frontend_EcoPlug](https://github.com/MuathOthman/EcoPlugMobileApp)
+
 Welcome to EcoPlug, an open-source electric vehicle (EV) charging system! This project aims to provide a scalable and efficient solution for managing EV charging stations. The system allows users to locate charging stations, view their details, and perform charging transactions seamlessly.
 
 ### Table of Contents
