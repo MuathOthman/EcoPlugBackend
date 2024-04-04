@@ -13,7 +13,7 @@ test('sendOTP', async () => {
 
 test('verifyOTP', async () => {
         const response = await request.post('/otp/verify-otp').send({
-            otp: '123456',
+            otp: '1234',
             phoneNumber: '+358442379461'
         });
         expect(response.status).toBe(200);
