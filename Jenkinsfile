@@ -9,17 +9,11 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        pwd
                         cp /var/lib/jenkins/workspace/.env .env
                     '''
                 }
             }
         }
-       stage('Checking .env file') {
-             steps {
-                  sh 'cat .env'
-             }
-       }
         stage('Checkout') {
             steps {
                 checkout scm
