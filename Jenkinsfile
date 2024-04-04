@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    sudo cp /home/group3/.env .env
+                        cp /home/group3/.env .env
                     '''
                 }
             }
