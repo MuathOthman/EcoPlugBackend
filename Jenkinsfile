@@ -9,6 +9,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        pwd
                         cp /home/group3/.env .env
                     '''
                 }
