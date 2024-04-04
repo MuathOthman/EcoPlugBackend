@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    echo "TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}" > .env
+                    echo "TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}" >> .env
                     echo "TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}" >> .env
                     echo "SID=${SID}" >> .env
                     echo "DB_Docker_Container=${DB_Docker_Container}" >> .env
@@ -18,7 +18,7 @@ pipeline {
                     echo "DB_USER=${DB_USER}" >> .env
                     echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
                     echo "DB_DATABASE=${DB_DATABASE}" >> .env
-                    cat .env  // Print the contents of .env file
+                    cat .env
                     '''
                 }
             }
