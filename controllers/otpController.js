@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 const twilio = require('twilio');
-const client = twilio("ACfad19283d4eab7089e34af46b35563db", process.env.TWILIO_AUTH_TOKEN);
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 let number = "+358442379461"
 
 
