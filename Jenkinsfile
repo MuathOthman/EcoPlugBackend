@@ -18,7 +18,7 @@ pipeline {
                     echo "DB_USER=${DB_USER}" >> .env
                     echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
                     echo "DB_DATABASE=${DB_DATABASE}" >> .env
-                    echo "${TWILIO_AUTH_TOKEN}"
+                    cat .env
                     '''
                 }
             }
