@@ -10,7 +10,7 @@ pipeline {
                 script {
                     sh '''
                         pwd
-                        cp /home/group3/.env .env
+                        cp /var/lib/jenkins/workspace/.env .env
                     '''
                 }
             }
