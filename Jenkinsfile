@@ -23,6 +23,11 @@ pipeline {
                 }
             }
         }
+       stage('Checking .env file') {
+             steps {
+                  sh 'cat .env'
+             }
+       }
         stage('Checkout') {
             steps {
                 checkout scm
