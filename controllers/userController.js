@@ -44,7 +44,6 @@ const freeLatauspiste = (req, res) => {
 
 const updateLataus = (req, res) => {
     const { latausID, chargingTime, totalCost, phoneNumber} = req.body;
-
     connection.query(
         'UPDATE Lataus SET kokonaisaika = ?, laskunhinta = ? WHERE latausID = ? and asiakas_puh = ?',
         [parseFloat(chargingTime), parseFloat(totalCost), latausID, phoneNumber],
