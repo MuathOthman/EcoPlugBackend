@@ -1,9 +1,7 @@
 const connection = require('../config/db');
 
 const findAll = (req, res) => {
-    const language = req.params.language;
-    console.log(language)
-    connection.query('SELECT * FROM Sijainti where lang = ?', [language],  (err, rows) => {
+    connection.query('SELECT * FROM Sijainti',  (err, rows) => {
         if (err) {
             res.status(500).send({ message: err.message || 'Some error occurred while retrieving sijainnit.' });
         } else {

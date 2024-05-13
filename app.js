@@ -6,10 +6,11 @@ const userRoutes = require('./routes/userRoutes');
 const chargingRoutes = require('./routes/chargingRoutes');
 const LanguageMiddleware = require('./middleware/LanguageMiddleware');
 const PORT = process.env.PORT || 3002;
+const cors = require('cors');
 
 
 app.use(express.json());
-
+app.use(cors());
 LanguageMiddleware(app);
 
 app.use('/sijainnit', sijainnitRoutes);
