@@ -58,13 +58,26 @@ const reserveParkingSpot = (req, res) => {
     });
 };
 
+const updateLocation = (req, res) => {
+    const latauspisteID = req.params.id;
+    const tila = req.body.tila;
+    connection.query('UPDATE Sijainti SET tila = ? WHERE sijainti_ID = ? ', [tila, latauspisteID], (err, result) => {
+        if (err) {
+            res.status(500).send({ message: err.message || 'Error updating parking spot.' });
+        } else {
+            res.status(200).send({ message: 'Parking spot updated successfully.', latauspisteID });
+        }
+    });
+};
+
 
 
 module.exports ={
     findAll,
     findOne,
     findParkings,
-    reserveParkingSpot
+    reserveParkingSpot,
+    updateLocation
 };
 
 
